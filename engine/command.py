@@ -6,14 +6,13 @@ import eel
 def speak(text):
     engine = pyttsx3.init('sapi5')  # Use 'sapi5' for Windows, 'espeak' for Linux
     voices = engine.getProperty('voices')
-    print("Available voices:",voices)
+#    print("Available voices:",voices)
     engine.setProperty('voice',voices[1].id)
     engine.setProperty('rate', 180)  # Set speech rate
     engine.say(text)
     engine.runAndWait()
-
-@eel.expose
 def takecommand():
+    
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
@@ -25,9 +24,9 @@ def takecommand():
         print("Recognizing...")
         eel.DisplayMessage("Recognizing...")
         query = r.recognize_google(audio, language='en-in')
-        print(f"User said: {query}")
+#        print(f"User said: {query}")
         eel.DisplayMessage(query)
-        speak(query)
+#        speak(query)
         eel.ShowHood()
     except Exception as e:
         return ""
@@ -36,3 +35,13 @@ def takecommand():
 #text = takecommand()
 
 #speak(text)
+
+@eel.expose
+def allCommands():
+    query = takecommand()
+    print(query)
+    if "open" in query:
+        from engine.features import openCommand
+        openCommand(query)
+    else:
+        print("Not opening...")
