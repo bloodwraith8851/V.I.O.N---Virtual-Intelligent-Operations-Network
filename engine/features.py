@@ -5,6 +5,11 @@ from engine.command import speak
 from engine.config import Assistant_Name
 import pywhatkit as kit
 import re
+import sqlite3
+import webbrowser
+
+conn = sqlite3.connect('vion.db')
+cursor = conn.cursor()
 
 # play assistant sound
 
@@ -19,12 +24,42 @@ def openCommand(query):
     query = query.replace(Assistant_Name,"")
     query = query.replace("open","")
     query.lower()
+    app_name = query.strip()
+
+    if app_name != "":
+
+        try:
+            cursor.execute(
+                'SELECT path FROM sys_command WHERE name IN (?)', (app_name,))
+            results = cursor.fetchall()
+
+            if len(results) != 0:
+                speak("Opening "+query)
+                os.startfile(results[0][0])
+
+            elif len(results) == 0: 
+                cursor.execute(
+                'SELECT url FROM web_command WHERE name IN (?)', (app_name,))
+                results = cursor.fetchall()
+                
+                if len(results) != 0:
+                    speak("Opening "+query)
+                    webbrowser.open(results[0][0])
+
+                else:
+                    speak("Opening "+query)
+                    try:
+                        os.system('start '+query)
+                    except:
+                        speak("not found")
+        except:
+            speak("some thing went wrong")
     
-    if query!="":
-        speak ("Opening "+query)
-        os.system("start "+query)
-    else:
-        speak("not found")
+    # if query!="":
+    #     speak ("Opening "+query)
+    #     os.system("start "+query)
+    # else:
+    #     speak("not found")
 
 # youtube command
 
