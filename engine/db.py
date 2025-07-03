@@ -21,7 +21,6 @@ cursor.execute(query)
 
 
 
-
 # cursor.execute("DELETE FROM sys_command WHERE id = ?", (4,))
 
 # conn.commit()
