@@ -47,5 +47,17 @@ $(document).ready(function() {
         eel.allCommands()()
     });
 
+    // Keyboard shortcut
+
+    function doc_keyup(e) {
+        if (e.key === 'v' && e.metaKey) {
+            eel.playassistantsound()
+            $("#Oval").attr("hidden", true);
+            $("#SiriWave").attr("hidden", false);
+            eel.allCommands()()
+        }
+    }
+    document.addEventListener('keyup', doc_keyup, false);
+
 
 });
