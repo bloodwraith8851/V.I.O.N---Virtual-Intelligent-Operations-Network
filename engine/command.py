@@ -14,14 +14,13 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
 def takecommand():
-    
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
         eel.DisplayMessage("Listening...")
         r.pause_threshold = 1
         r.adjust_for_ambient_noise(source)
-        audio = r.listen(source, 10 , 7) # 10 seconds timeout for audio input from the user and 6 seconds for speech recognition
+        audio = r.listen(source, 10 , 6 # 10 seconds timeout for audio input from the user and 6 seconds for speech recognition
     try:
         print("Recognizing...")
         eel.DisplayMessage("Recognizing...")
