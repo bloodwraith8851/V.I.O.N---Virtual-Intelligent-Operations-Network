@@ -7,6 +7,11 @@ import pywhatkit as kit
 import re
 import sqlite3
 import webbrowser
+import pvporcupine
+import struct
+import pyaudio
+import time
+from engine.helper import extract_yt_term
 
 conn = sqlite3.connect('vion.db')
 cursor = conn.cursor()
@@ -68,12 +73,17 @@ def PlayYoutube(query):
     speak("playing " + search_term + " on youtube")
     kit.playonyt(search_term)
 
-# extract search term
+def hotword():
+    porcupine = None
+    paud = None
+    audio_stream = None
+    try:
+        #pre trained keywords
+        porcupine=pvporcupine.create(keywords=["vion","vi"])
+        paud = pyaudio.PyAudio()
+        audio_stream = paud.open(rate=porcupine.sample_rate,channels=1,format=pyaudio.paInt16,input=True,frames_per_buffer=porcupine.frame_length)
 
-def extract_yt_term(command):
-    # Regular expression pattern to extract the search term
-    pattern = r'play\s+(.*?)\s+on\s+youtube'
-    # Search for the pattern in the command 
-    match = re.search(pattern, command, re.IGNORECASE)
-    # Return the search term if found and None otherwise 
-    return match.group(1) if match else None
+        #loop for streaming
+        while True:
+            keyword=audion_stream.read(porcupine.frame_length)
+            keyword=struct.unpack_from("h"*porcupine.frame_length,keyword) 

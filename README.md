@@ -1,4 +1,5 @@
-# 🤖 V.I.O.N - Virtual Intelligent Operations Network
+# 🤖 QUILL-Quantum Unified Intelligent Learning Logic
+
 
 <div align="center">
 
@@ -71,14 +72,14 @@ The project is divided into two main components: the Python backend (engine) and
     ```
     > ⚠️ **Note:** For `PyAudio` installation issues, visit [Christoph Gohlke's Unofficial Windows Binaries](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)
 
-3.  🎯 **Launch V.I.O.N:**
+3.  🎯 **Launch QUILL:**
     ```sh
     python main.py
     ```
 
 ## 🎮 Usage
 
-1.  🎤 **Activate V.I.O.N**: Click microphone icon or press `Win + V`
+1.  🎤 **Activate QUILL**: Click microphone icon or press `Win + V`
 2.  🗣️ **Speak Commands**: Watch for the wave animation indicating listening mode
 3.  📝 **View Feedback**: See recognized text and responses on screen
 
@@ -94,7 +95,7 @@ The project is divided into two main components: the Python backend (engine) and
 
 ## ⚙️ Customizing Commands
 
-Extend V.I.O.N's capabilities through the SQLite database (`vion.db`).
+Extend QUILL capabilities through the SQLite database (`vion.db`).
 
 ### 📱 Add a New Application
 
